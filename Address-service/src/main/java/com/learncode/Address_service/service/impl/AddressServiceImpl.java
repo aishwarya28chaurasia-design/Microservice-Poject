@@ -1,5 +1,6 @@
 package com.learncode.Address_service.service.impl;
 
+import com.learncode.Address_service.client.EmployeeClient;
 import com.learncode.Address_service.exception.ResourceNotFoundException;
 import com.learncode.Address_service.model.dto.AddressDto;
 import com.learncode.Address_service.model.dto.AddressRequest;
@@ -22,16 +23,17 @@ public class AddressServiceImpl implements AddressService {
     Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
     private final AddressRepository addressRepository;
     private final ModelMapper modelMapper;
+    private final EmployeeClient employeeClient;
 
-    public AddressServiceImpl(AddressRepository addressRepository, ModelMapper modelMapper) {
+    public AddressServiceImpl(AddressRepository addressRepository, ModelMapper modelMapper, EmployeeClient employeeClient) {
         this.addressRepository = addressRepository;
         this.modelMapper = modelMapper;
+        this.employeeClient = employeeClient;
     }
 
     @Override
     public List<AddressDto> saveAddress(AddressRequest addressRequest) {
-        //TODO: check if employee exist
-
+        employeeClient.getEmployeeById(addressRequest.getEmpId());
         List<Address> listToSave = this.saveOrUpdateAddress(addressRequest);
         List<Address> savedAddressList = addressRepository.saveAll(listToSave);
         return listToSave.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
@@ -39,8 +41,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDto> updateAddress(AddressRequest addressRequest) {
-        //TODO: check if employee exist
-
+        employeeClient.getEmployeeById(addressRequest.getEmpId());
         List<Address> addressList = addressRepository.findByEmpId(addressRequest.getEmpId());
         if(addressList.isEmpty()){
             logger.info("No Address found with this empId {} ", addressRequest.getEmpId());
@@ -70,6 +71,13 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address not found with id " + id));
         return modelMapper.map(address,AddressDto.class);
 
+    }
+    public List<AddressDto> getAddressByEmpId(Long empId){
+        List<Address> addressByEmpId = addressRepository.findByEmpId(empId);
+        if(addressByEmpId.isEmpty()){
+            throw new ResourceNotFoundException("No Address found with this empId " + empId);
+        }
+        return addressByEmpId.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
     }
 
     @Override

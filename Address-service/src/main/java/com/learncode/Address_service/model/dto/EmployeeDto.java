@@ -1,10 +1,5 @@
-package com.learncode.employee.model.dto;
+package com.learncode.Address_service.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.util.List;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeDto {
 
     private Long id;
@@ -12,7 +7,6 @@ public class EmployeeDto {
     private  String empEmail;
     private String empCode;
     private String companyName;
-    private List<AddressDto> addressDto;
 
     public EmployeeDto() {
     }
@@ -63,14 +57,6 @@ public class EmployeeDto {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public List<AddressDto> getAddressDto() {
-        return addressDto;
-    }
-
-    public void setAddressDto(List<AddressDto> addressDto) {
-        this.addressDto = addressDto;
     }
 
     @Override

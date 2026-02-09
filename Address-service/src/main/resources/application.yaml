@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: Address-service
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/employeeservice
+    username: root
+    password: root
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        jdbc:
+          batch_size: 50 #  30-50 is usually the "sweet spot"
+          order_inserts: true
+          order_updates: true
+          generate_statistics: true
+
+server:
+  port: 8082

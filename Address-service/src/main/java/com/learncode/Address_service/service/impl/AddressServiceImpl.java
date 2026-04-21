@@ -36,7 +36,7 @@ public class AddressServiceImpl implements AddressService {
         employeeClient.getEmployeeById(addressRequest.getEmpId());
         List<Address> listToSave = this.saveOrUpdateAddress(addressRequest);
         List<Address> savedAddressList = addressRepository.saveAll(listToSave);
-        return listToSave.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
+        return savedAddressList.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
     }
 
     @Override

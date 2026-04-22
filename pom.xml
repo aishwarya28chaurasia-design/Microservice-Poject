@@ -31,6 +31,11 @@
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.organization>your-org-key</sonar.organization>
+        <sonar.projectKey>your-unique-project-key</sonar.projectKey>
+
+        <sonar.exclusions>**/target/**, **/test/**</sonar.exclusions>
     </properties>
 
     <build>
@@ -42,6 +47,11 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.0.0.4389</version>
             </plugin>
         </plugins>
     </build>

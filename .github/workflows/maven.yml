@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '21'
-        distribution: 'oracle openjdk'
+        distribution: 'oracle'
         cache: maven
     - name: Build Microservices
       run: mvn -B package --file API-Gateway/pom.xml

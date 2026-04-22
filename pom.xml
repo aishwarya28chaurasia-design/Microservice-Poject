@@ -35,12 +35,11 @@
         <sonar.organization>aishwarya28chaurasia-design</sonar.organization>
         <sonar.projectKey>aishwarya28chaurasia-design_Microservice-Project</sonar.projectKey>
 
-        <sonar.exclusions>**/target/**, **/test/**</sonar.exclusions>
-        <sonar.cpd.exclusions>
-            **/dto/*.java,
-            **/entity/*.java,
-            **/config/*.java
-        </sonar.cpd.exclusions>
+        <sonar.coverage.exclusions>**/*.java</sonar.coverage.exclusions>
+
+        <sonar.cpd.exclusions>**/*.java</sonar.cpd.exclusions>
+
+        <sonar.exclusions>**/test/**, **/target/**</sonar.exclusions>
     </properties>
 
     <build>

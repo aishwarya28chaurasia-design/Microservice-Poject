@@ -28,7 +28,8 @@ jobs:
         distribution: 'oracle'
         cache: maven
     - name: Build Microservices
-      run: mvn -B package --file API-Gateway/pom.xml
+      run: |
+        mvn -B package --file API-Gateway/pom.xml
         mvn -B package --file Auth-Service/pom.xml
         mvn -B package --file Employee-service/pom.xml
         mvn -B package --file Address-service/pom.xml

@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and Analyze
         env:
-          SONAR_TOKEN: ${{ secrets.GITHUB_SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # We use 'verify' to ensure tests run and results are sent to Sonar
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DskipTests
